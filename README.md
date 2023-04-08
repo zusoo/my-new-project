@@ -77,3 +77,21 @@ How could your project grow and become something even more? What kind of skills,
 * when you have permission to use other people's materials, always mention the original creator and the open source / Creative Commons licence they've used
   <br>For example: [Sleeping Cat on Her Back by Umberto Salvagnin](https://commons.wikimedia.org/wiki/File:Sleeping_cat_on_her_back.jpg#filelinks) / [CC BY 2.0](https://creativecommons.org/licenses/by/2.0)
 * etc
+
+
+
+from PIL import Image, ImageFilter
+
+# Load an image
+image = Image.open('/FBB.png')
+
+# Apply a Gaussian blur to the image
+blurred_image = image.filter(ImageFilter.GaussianBlur(radius=5))
+
+# Apply edge detection to the image
+edged_image = blurred_image.filter(ImageFilter.FIND_EDGES)
+
+# Display the original image and the processed image side-by-side
+image.show()
+edged_image.show()
+
