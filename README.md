@@ -2,64 +2,86 @@
 created by Reaktor Innovations and University of Helsinki. 
 Copy the template, paste it to your GitHub README and edit! -->
 
-# My project AI
+# My Project to Find flower as per my required size
 
 Final project for the Building AI course
 
 ## Summary
 
-Describe briefly in 2-3 sentences what your project is about. About 250 characters is a nice length! 
+My Project is about to find image from data set 
+it will tell all the heads of data sets.
+Also detail the total number of images in data set and in following picuter, if you want to see rose flower no 2 it will show you 
+
+
+
+![image](https://user-images.githubusercontent.com/122665993/230756152-03fa8d50-5ccd-4e9c-8607-048fb50c8e41.png)
 
 
 ## Background
 
-Which problems does your idea solve? How common or frequent is this problem? What is your personal motivation? Why is this topic important or interesting?
+it Sort out your dificulty ? How common or frequent is this problem? What is your personal motivation? Why is this topic important or interesting?
 
 This is how you make a list, if you need one:
-* problem 1
-* problem 2
-* etc.
+I need a rose flowr from thousands 
+i need only tupil
+any one wants to pic a rose
 
 
 ## How is it used?
 
-Describe the process of using the solution. In what kind situations is the solution needed (environment, time, etc.)? Who are the users, what kinds of needs should be taken into account?
+Simple process to use it copy the code and run 
 
 Images will make your README look nice!
 Once you upload an image to your repository, you can link link to it like this (replace the URL with file path, if you've uploaded an image to Github.)
-![Cat](https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg)
-![image of a ball](/FBB.png)
+![image](https://user-images.githubusercontent.com/122665993/230756267-73a9c01d-3c5e-46e7-b0f4-441377b4ffd8.png)
+
 If you need to resize images, you have to use an HTML tag, like this:
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg" width="300">
+![image](https://user-images.githubusercontent.com/122665993/230756275-54a5ddf7-4f60-428e-862f-91d94e54400f.png widt="300")
 
-This is how you create code examples:
+This is  code examples:
 ```
-def main():
-   countries = ['Denmark', 'Finland', 'Iceland', 'Norway', 'Sweden']
-   pop = [5615000, 5439000, 324000, 5080000, 9609000]   # not actually needed in this exercise...
-   fishers = [1891, 2652, 3800, 11611, 1757]
+# these files are necessary to import as it is
+import numpy as np
+import os
+import PIL
+import PIL.Image
+import tensorflow as tf
+import tensorflow_datasets as tfds
+import pathlib
 
-   totPop = sum(pop)
-   totFish = sum(fishers)
+# here you can load dataset what you want i have loaded a data set of flowers 
+# do not do any thing more these are builtin you have to change only paths
+dataset_url = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz"
+archive = tf.keras.utils.get_file(origin=dataset_url, extract=True)
+data_dir = pathlib.Path(archive).with_suffix('')
 
-   # write your solution here
+#this line will tell you how many roses are in the data set
+image_count = len(list(data_dir.glob('*/*.jpg')))
+print("there are total images",image_count);
 
-   for i in range(len(countries)):
-      print("%s %.2f%%" % (countries[i], 100.0))    # current just prints 100%
+# now set the size of image what you like
+batch_size = 32
+img_height = 180
+img_width = 180
 
-main()
+
+
+# now the result will be as follow
+ #                                        there are total images 3670
+  #                                        ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
+# at this stage i know there are six classes in this data set namely above now i want to see the image of sunflowers at 2 number
+flower = list(data_dir.glob('daisy/*'))
+PIL.Image.open(str(flower[2]))
+
 ```
 
 
 ## Data sources and AI methods
-Where does your data come from? Do you collect it yourself or do you use data collected by someone else?
-If you need to use links, here's an example:
-[Twitter API](https://developer.twitter.com/en/docs)
+if you want to see more please visit the following link
+https://www.tensorflow.org/tutorials/load_data/images
 
-| Syntax      | Description |
-| ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
+you can use ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
+where in code daisy written and also can change the number as you desire
 
 ## Challenges
 
@@ -75,23 +97,5 @@ How could your project grow and become something even more? What kind of skills,
 * list here the sources of inspiration 
 * do not use code, images, data etc. from others without permission
 * when you have permission to use other people's materials, always mention the original creator and the open source / Creative Commons licence they've used
-  <br>For example: [Sleeping Cat on Her Back by Umberto Salvagnin](https://commons.wikimedia.org/wiki/File:Sleeping_cat_on_her_back.jpg#filelinks) / [CC BY 2.0](https://creativecommons.org/licenses/by/2.0)
-* etc
-
-
-
+ 
 from PIL import Image, ImageFilter
-
-# Load an image
-image = Image.open('/FBB.png')
-
-# Apply a Gaussian blur to the image
-blurred_image = image.filter(ImageFilter.GaussianBlur(radius=5))
-
-# Apply edge detection to the image
-edged_image = blurred_image.filter(ImageFilter.FIND_EDGES)
-
-# Display the original image and the processed image side-by-side
-image.show()
-edged_image.show()
-
